@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book an Appointment</title>
+  <link rel="stylesheet" href="/style.css" />
+</head>
+<body>
+      <%- include('partials/header', { session: session, page: 'schedule' }) %>
+
+  <h1>Schedule an Appointment</h1>
+  <form action="/book" method="POST">
+    <label>Your Name:</label>
+    <input type="text" name="studentName" required />
+    <label>Select Time:</label>
+    <select name="timeSlot">
+      <option>Monday 10AM</option>
+      <option>Monday 2PM</option>
+      <option>Tuesday 1PM</option>
+      <option>Wednesday 3PM</option>
+    </select>
+    <button type="submit">Book</button>
+  </form>
+
+  <h2>Booked Appointments:</h2>
+  <ul>
+    <% appointments.forEach(function(a) { %>
+      <li><strong><%= a.studentName %></strong> - <%= a.timeSlot %></li>
+    <% }); %>
+  </ul>
+          <%- include('partials/footer') %>
+
+</body>
+</html>

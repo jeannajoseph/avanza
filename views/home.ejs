@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Avanza – Personalized Academic Coaching</title>
+  <!-- Load Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- **Custom CSS for Slideshow (No Tailwind dependency used here)** -->
+  <style>
+    /* 1. Ensure the Hero section can contain absolutely positioned elements */
+    #hero-section {
+        position: relative;
+        overflow: hidden;
+        color: white; /* Ensure text is visible over the dark overlay */
+        padding-top: 8rem !important; /* Increase vertical padding */
+        padding-bottom: 8rem !important;
+        /* CRITICAL FIX: Ensure Hero section does NOT overlap the header */
+        z-index: 0; 
+    }
+
+    /* 2. Style the Slideshow Container */
+    #slideshow-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1; /* Below the overlay and content */
+    }
+
+    /* 3. Style and position the individual images */
+    #slideshow-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0; /* Start hidden */
+      transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+    }
+
+    /* 4. Overlay to ensure text readability */
+    .hero-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5); /* Darker overlay */
+        z-index: 2; /* Above the images */
+    }
+
+    /* 5. Ensure the content (text, button) is on top */
+    #hero-section .container {
+        position: relative;
+        z-index: 3; /* Above everything else */
+    }
+    
+    /* 6. Text shadow for better contrast */
+    .shadow-text {
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
+    }
+  </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+
+  <%- include('partials/header', { session: session, page: 'home' }) %>
+
+  <main class="flex-fill">
+
+    <!-- HERO SECTION - Now relies only on custom CSS for layout -->
+    <section id="hero-section" class="text-center">
+      
+      <!-- Slideshow Background Container -->
+      <div id="slideshow-container">
+        <!-- Image 1 -->
+        <img src="https://www.princeton.edu//sites/default/files/images/2017/06/20060425_NassauHall_JJ_IMG_5973.jpg" alt="Princeton University" />
+        
+        <!-- Image 2 -->
+        <img src="https://miro.medium.com/v2/resize:fit:4000/1*JiD3_Vof-Fy71LVbHSAaVQ.jpeg" alt="Cornell University" />
+        
+        <!-- Image 3 -->
+        <img src="https://www.elite-admission.com/wp-content/uploads/2020/04/1280px-Stanford_University_Main_Quad_May_2011_005.jpg" alt="Stanford University" />
+      </div>
+
+      <!-- Overlay -->
+      <div class="hero-overlay"></div>
+
+      <!-- Content Layer -->
+      <div class="container">
+        <h1 class="display-4 fw-bold shadow-text">Unlock Your Academic Potential</h1>
+        <p class="lead mt-3 shadow-text">
+          Personalized coaching that empowers students to excel in school, build strong habits, 
+          and achieve long-term success.
+        </p>
+
+        <% if (!session || !session.userId) { %>
+          <a href="/register" class="btn btn-primary btn-lg mt-5 fw-bold shadow-lg" style="background-color: #FF8C00; border-color: #FF8C00;">Get Started</a>
+        <% } %>
+      </div>
+    </section>
+
+    <!-- SERVICES PREVIEW -->
+    <section class="container py-5">
+      <h2 class="text-center mb-4">Our Services</h2>
+      <div class="row g-4">
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">1:1 Academic Coaching</h5>
+              <p>Weekly personalized sessions focused on organization, planning, and skill-building.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Executive Function Support</h5>
+              <p>Strategies for time management, task initiation, and long-term goal setting.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <h5 class="card-title">Homework & Study Coaching</h5>
+              <p>Ongoing academic support designed to improve confidence and independence.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+
+  <%- include('partials/footer') %>
+
+  <!-- CRITICAL: Bootstrap JS is required for the navbar tabs to show/toggle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- Slideshow JavaScript Logic -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = document.querySelectorAll('#slideshow-container img');
+      let currentImageIndex = 0;
+      const intervalTime = 5000; // 5 seconds
+
+      // Set initial state: only the first image should be visible
+      if (images.length > 0) {
+        images.forEach(img => img.style.opacity = '0'); // Ensure all are initially hidden
+        images[currentImageIndex].style.opacity = '1'; // Show the first one
+      }
+
+      function nextSlide() {
+        // 1. Hide the current image
+        images[currentImageIndex].style.opacity = '0';
+
+        // 2. Calculate the index of the next image (looping)
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+
+        // 3. Show the next image
+        images[currentImageIndex].style.opacity = '1';
+      }
+
+      // Start the slideshow interval
+      if (images.length > 1) {
+        setInterval(nextSlide, intervalTime);
+      }
+    });
+  </script>
+</body>
+</html>
