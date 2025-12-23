@@ -1,7 +1,55 @@
-<footer class="bg-dark text-white py-4 mt-5">
-  <div class="container text-center">
-    <p class="mb-1">© <%= new Date().getFullYear() %> Avanza Education</p>
-    <p class="small">Empowering students through personalized academic coaching.</p>
+<footer class="bg-dark text-white pt-5 pb-4 mt-5">
+  <div class="container">
+    <div class="row">
+      
+      <div class="col-md-5 mb-4">
+        <h5 class="fw-bold">Advance Your Future</h5>
+        <p>Subscribe to our newsletter for exclusive tips and updates!</p>
+        
+        <form action="/subscribe" method="POST" class="needs-validation" novalidate>
+          <div class="mb-3">
+            <input type="email" class="form-control" name="email" placeholder="Your Email Address" required>
+            <div class="invalid-feedback">Please enter a valid email address.</div>
+          </div>
+          <button 
+            type="submit" 
+            class="btn fw-bold" 
+            style="background-color: #FF8C00; border-color: #FF8C00; color: #fff;"
+          >
+            Subscribe
+          </button>
+          <p class="small mt-2">We'll send you an automatic SMS/email to schedule your free consultation!</p>
+        </form>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <h5 class="fw-bold">Quick Links</h5>
+        <ul class="list-unstyled">
+          <li><a href="/" class="text-white text-decoration-none">Home</a></li>
+          <li><a href="/about" class="text-white text-decoration-none">About Us</a></li>
+          <li><a href="/services" class="text-white text-decoration-none">Services</a></li>
+          <li><a href="/results" class="text-white text-decoration-none">Results</a></li>
+          <li><a href="/blog" class="text-white text-decoration-none">Blog</a></li>
+        </ul>
+      </div>
+
+      <div class="col-md-4 mb-4">
+        <h5 class="fw-bold">Connect</h5>
+        <p>Email: <a href="mailto:info@eduempowered.org" class="text-white text-decoration-none">info@eduempowered.org</a></p>
+        <p>WhatsApp: +1-555-EDU-EMPD</p>
+        
+        <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-white me-3"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-white"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+
+    </div>
+
+    <div class="text-center pt-3 border-top border-secondary">
+      <p class="mb-1">© <%= new Date().getFullYear() %> Avanza Education. All Rights Rights Reserved.</p>
+      <p class="small">Empowering students through personalized academic coaching.</p>
+    </div>
   </div>
 </footer>
 

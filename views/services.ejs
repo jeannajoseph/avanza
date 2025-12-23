@@ -3,28 +3,60 @@
 <head>
   <title>Services – Avanza</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-  <%- include('partials/header', { session: session, page: 'services' }) %>
+  <%- include('partials/navbar', { session: session, page: 'services' }) %>
 
     <main class="flex-fill">
 
   <section class="container py-5">
-    <h1 class="mb-4">Our Services</h1>
+    <h1 class="mb-4 text-primary fw-bold">Our Personalized Coaching Programs</h1>
 
-    <div class="mb-4">
-      <h3>1:1 Coaching</h3>
-      <p>Weekly personalized support tailored to each student's academic goals.</p>
+    <div class="alert alert-warning text-center" role="alert">
+        <strong>Important:</strong> Spots fill up quickly! <a href="/schedule" class="alert-link fw-bold">Book a free call now to check coach availability and upcoming deadlines.</a>
     </div>
 
-    <div class="mb-4">
-      <h3>Executive Function Coaching</h3>
-      <p>Improve planning, time management, organization, and sustained attention.</p>
+    <div class="mb-5 p-4 border rounded shadow-sm">
+      <h3 class="fw-bold">1:1 Academic Coaching</h3>
+      <p class="lead">Weekly personalized sessions tailored to each student's specific academic goals and needs.</p>
+      <div class="row">
+        <div class="col-md-8">
+            <p>This program is designed for students who need consistent support to manage their heavy workload. We focus on accountability, goal-setting, and mastering subject-specific content. This is our foundational offering to boost grades and confidence.</p>
+            <p class="small text-muted">Typical Enrollment: Ongoing, with major college application deadlines affecting availability.</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="/schedule" class="btn btn-lg btn-warning mt-3 fw-bold">View Packages & Enroll</a>
+        </div>
+      </div>
     </div>
 
-    <div class="mb-4">
-      <h3>Study Skills & Homework Support</h3>
-      <p>Learn effective study strategies and develop consistent academic routines.</p>
+    <div class="mb-5 p-4 border rounded shadow-sm">
+      <h3 class="fw-bold">Executive Function Coaching</h3>
+      <p class="lead">Improve planning, time management, organization, and sustained attention for long-term success.</p>
+      <div class="row">
+        <div class="col-md-8">
+            <p>Executive Function (EF) is the brain's control system. Our specialized EF coaching provides strategies to overcome procrastination, improve focus, manage long-term projects, and develop essential self-regulation skills crucial for college-level independence.</p>
+            <p class="small text-muted">Ideal for middle and high school students looking for foundational skill development.</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="/schedule" class="btn btn-lg btn-warning mt-3 fw-bold">View Packages & Enroll</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-5 p-4 border rounded shadow-sm">
+      <h3 class="fw-bold">Study Skills & Homework Support</h3>
+      <p class="lead">Learn effective study strategies and develop consistent academic routines to maximize results.</p>
+      <div class="row">
+        <div class="col-md-8">
+            <p>Beyond content knowledge, students must know *how* to learn efficiently. This program addresses test-taking strategies, note-taking methods, active recall, and building a structured homework environment for improved confidence and independence.</p>
+            <p class="small text-muted">Availability is often limited during peak testing and final exam seasons.</p>
+        </div>
+        <div class="col-md-4 text-center">
+            <a href="/schedule" class="btn btn-lg btn-warning mt-3 fw-bold">View Packages & Enroll</a>
+        </div>
+      </div>
     </div>
 
   </section>

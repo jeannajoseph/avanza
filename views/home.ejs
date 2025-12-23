@@ -2,20 +2,19 @@
 <html>
 <head>
   <title>Avanza – Personalized Academic Coaching</title>
-  <!-- Load Bootstrap 5 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   
-  <!-- **Custom CSS for Slideshow (No Tailwind dependency used here)** -->
   <style>
     /* 1. Ensure the Hero section can contain absolutely positioned elements */
     #hero-section {
         position: relative;
         overflow: hidden;
         color: white; /* Ensure text is visible over the dark overlay */
-        padding-top: 8rem !important; /* Increase vertical padding */
+        padding-top: 8rem !important;
+        /* Increase vertical padding */
         padding-bottom: 8rem !important;
         /* CRITICAL FIX: Ensure Hero section does NOT overlap the header */
-        z-index: 0; 
+        z-index: 0;
     }
 
     /* 2. Style the Slideshow Container */
@@ -25,7 +24,8 @@
         left: 0;
         width: 100%;
         height: 100%;
-        z-index: 1; /* Below the overlay and content */
+        z-index: 1;
+        /* Below the overlay and content */
     }
 
     /* 3. Style and position the individual images */
@@ -36,8 +36,10 @@
       position: absolute;
       top: 0;
       left: 0;
-      opacity: 0; /* Start hidden */
-      transition: opacity 1.5s ease-in-out; /* Smooth fade effect */
+      opacity: 0;
+      /* Start hidden */
+      transition: opacity 1.5s ease-in-out;
+      /* Smooth fade effect */
     }
 
     /* 4. Overlay to ensure text readability */
@@ -47,8 +49,10 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.5); /* Darker overlay */
-        z-index: 2; /* Above the images */
+        background-color: rgba(0, 0, 0, 0.5);
+        /* Darker overlay */
+        z-index: 2;
+        /* Above the images */
     }
 
     /* 5. Ensure the content (text, button) is on top */
@@ -61,90 +65,487 @@
     .shadow-text {
         text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8);
     }
+    
+    /* NEW: Universal Orange Button Style */
+    .btn-primary-orange {
+        background-color: #FF8C00 !important;
+        border-color: #FF8C00 !important;
+        color: #fff !important; /* White text */
+        font-weight: bold;
+        box-shadow: 0 4px 8px rgba(255, 140, 0, 0.4); 
+    }
+    
+    /* UPDATED: CSS for the Scrolling Statistics Banner */
+    .scrolling-stats-section {
+        overflow: hidden; /* Hide anything outside the container */
+        white-space: nowrap; /* Keep items on a single line */
+        background-color: #f8f9fa; /* Light background for contrast */
+        padding: 1rem 0; /* Reduced padding slightly */
+        border-top: 1px solid #dee2e6;
+        border-bottom: 1px solid #dee2e6;
+    }
+
+    /* Outer container for each line */
+    .scrolling-line-container {
+        width: 100%;
+        overflow: hidden;
+        margin: 0.5rem 0; /* Vertical spacing between lines */
+    }
+
+    /* The animation target - must be wide enough to contain duplicated content */
+    .stat-list {
+        display: inline-flex; /* Use flex for precise spacing */
+        animation: scroll-stats 40s linear infinite; /* Slower speed: 40s */
+        padding-right: 2rem; /* Initial padding space to prevent overlap on repeat */
+    }
+    
+    /* Reverse the animation direction for the second line */
+    #stat-list-2 {
+        animation-name: scroll-stats-reverse;
+        animation-direction: reverse; /* Scrolls right-to-left */
+    }
+    
+    .stat-group {
+        display: flex; /* Keep the number and text together */
+        align-items: baseline;
+        padding-right: 4rem; /* Spacing between the full stat groups */
+    }
+
+    .stat-number {
+        font-size: 2.25rem; /* Larger number */
+        font-weight: 900; /* Extra bold like the screenshot */
+        color: #FF8C00; /* Using Bootstrap 'danger' red for high contrast */
+        margin-right: 0.75rem;
+        line-height: 1; /* Tighter line height */
+    }
+    
+    .stat-description {
+        font-size: 1.25rem;
+        font-weight: 500;
+        color: #212529; /* Dark text for contrast */
+        line-height: 1;
+    }
+    
+    /* Keyframes for the scrolling animation (leftward) */
+    @keyframes scroll-stats {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } /* Scrolls 50% of the combined width */
+    }
+    
+    /* Keyframes for the scrolling animation (rightward - reversed) */
+    @keyframes scroll-stats-reverse {
+        from { transform: translateX(0); }
+        to { transform: translateX(-50%); } 
+    }
+    
+    /* CSS for the ACCURATE How We Work Section */
+    .how-we-work-dark {
+        background-color: #000;
+        color: #fff;
+        padding: 6rem 0;
+    }
+    
+    .how-we-work-dark .display-4 {
+        color: #fff; /* Ensure title is white */
+    }
+
+    /* CORE ACCORDION STYLING RESET */
+    .how-we-work-dark .accordion-item {
+        background-color: transparent;
+        border: none; /* Remove default item border */
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Custom separator line */
+    }
+    .how-we-work-dark .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    /* ACCORDION BUTTON STYLING (The Step Header) */
+    .how-we-work-dark .accordion-button {
+        background-color: transparent !important;
+        color: #fff !important;
+        box-shadow: none !important;
+        padding: 1.25rem 0; /* Match screenshot padding */
+        font-size: 1.25rem;
+        font-weight: 500;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 100%;
+        text-align: left;
+    }
+    
+    /* Text style when step is open (active) */
+    .how-we-work-dark .accordion-button:not(.collapsed) {
+        font-weight: 700;
+        color: #fff;
+    }
+
+    /* ACCORDION ICON (Plus/Minus) */
+    .how-we-work-dark .accordion-button::after {
+        /* Bootstrap's default chevron icon removal */
+        display: none;
+    }
+
+    .plus-minus-icon {
+        font-size: 1.5rem;
+        transition: transform 0.3s ease;
+        line-height: 1;
+        margin-left: 1rem;
+        /* Default state: plus sign */
+        transform: rotate(0deg); 
+    }
+    
+    /* Icon change when open (Minus sign) */
+    .how-we-work-dark .accordion-button:not(.collapsed) .plus-minus-icon {
+        transform: rotate(45deg); /* Rotates plus sign into a minus sign / X */
+    }
+
+    /* ACCORDION BODY STYLING */
+    .how-we-work-dark .accordion-body {
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.7);
+        padding: 0 1.5rem 1.25rem 0;
+    }
+    
+    /* NEW: CSS for the Results & Testimonials Carousel */
+    .results-section {
+        background-color: #f4f4f4; /* Light grey background for contrast */
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+        background-color: #FF8C00; /* Orange background for controls */
+        border-radius: 50%;
+        width: 3rem;
+        height: 3rem;
+        opacity: 1;
+        transition: opacity 0.15s ease;
+    }
+    
+    .carousel-control-prev,
+    .carousel-control-next {
+        width: 5%; /* Adjust width to keep controls near the content */
+    }
+
+    .logo-item img {
+        max-width: 100px; /* Standardize logo size */
+        height: auto;
+        margin-bottom: 0.5rem;
+    }
+
+    .testimonial-card {
+        padding: 1.5rem;
+        text-align: center;
+        max-width: 350px;
+        margin: 0 auto;
+    }
+
+    .testimonial-card img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+        border-radius: 50%;
+        margin-bottom: 1rem;
+        border: 4px solid #fff; /* White ring around image */
+        box-shadow: 0 0 0 2px #ccc; /* Subtle ring like in the screenshot */
+    }
+
+    .testimonial-text {
+        font-style: italic;
+        margin-bottom: 0.5rem;
+    }
+
+    .testimonial-author {
+        font-size: 0.9rem;
+        color: #777;
+    }
   </style>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
 
-  <%- include('partials/header', { session: session, page: 'home' }) %>
+  <%- include('partials/navbar', { session: session, page: 'home' }) %>
 
   <main class="flex-fill">
 
-    <!-- HERO SECTION - Now relies only on custom CSS for layout -->
     <section id="hero-section" class="text-center">
       
-      <!-- Slideshow Background Container -->
       <div id="slideshow-container">
-        <!-- Image 1 -->
         <img src="https://www.princeton.edu//sites/default/files/images/2017/06/20060425_NassauHall_JJ_IMG_5973.jpg" alt="Princeton University" />
         
-        <!-- Image 2 -->
         <img src="https://miro.medium.com/v2/resize:fit:4000/1*JiD3_Vof-Fy71LVbHSAaVQ.jpeg" alt="Cornell University" />
         
-        <!-- Image 3 -->
         <img src="https://www.elite-admission.com/wp-content/uploads/2020/04/1280px-Stanford_University_Main_Quad_May_2011_005.jpg" alt="Stanford University" />
       </div>
 
-      <!-- Overlay -->
       <div class="hero-overlay"></div>
 
-      <!-- Content Layer -->
       <div class="container">
-        <h1 class="display-4 fw-bold shadow-text">Unlock Your Academic Potential</h1>
+        <h1 class="display-4 fw-bold shadow-text">Advance Your Future</h1>
         <p class="lead mt-3 shadow-text">
           Personalized coaching that empowers students to excel in school, build strong habits, 
           and achieve long-term success.
         </p>
 
         <% if (!session || !session.userId) { %>
-          <a href="/register" class="btn btn-primary btn-lg mt-5 fw-bold shadow-lg" style="background-color: #FF8C00; border-color: #FF8C00;">Get Started</a>
+          <a href="/register" class="btn btn-primary btn-lg mt-5 fw-bold shadow-lg btn-primary-orange">Get Started Today</a>
         <% } %>
       </div>
     </section>
 
-    <!-- SERVICES PREVIEW -->
     <section class="container py-5">
-      <h2 class="text-center mb-4">Our Services</h2>
-      <div class="row g-4">
-
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">1:1 Academic Coaching</h5>
-              <p>Weekly personalized sessions focused on organization, planning, and skill-building.</p>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="ratio ratio-16x9 shadow-lg">
+                    <iframe 
+                        src="https://www.youtube.com/embed/99dLolluwYw" 
+                        title="The Story Behind Empowered Education" 
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe>
+                </div>
             </div>
-          </div>
         </div>
-
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Executive Function Support</h5>
-              <p>Strategies for time management, task initiation, and long-term goal setting.</p>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="card h-100 shadow-sm">
-            <div class="card-body">
-              <h5 class="card-title">Homework & Study Coaching</h5>
-              <p>Ongoing academic support designed to improve confidence and independence.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </section>
+
+    <section class="scrolling-stats-section">
+        
+        <div class="scrolling-line-container">
+            <div class="stat-list" id="stat-list-1">
+                <%- include('partials/scrolling-stats-content') %>
+                <%- include('partials/scrolling-stats-content') %>
+            </div>
+        </div>
+        
+        <div class="scrolling-line-container">
+            <div class="stat-list" id="stat-list-2">
+                <%- include('partials/scrolling-stats-content') %>
+                <%- include('partials/scrolling-stats-content') %>
+            </div>
+        </div>
+        
+    </section>
+
+    <section class="how-we-work-dark">
+        <div class="container">
+            
+            <div class="row align-items-center">
+                
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    
+                    <h2 class="display-4 fw-bold mb-4">How We Work</h2>
+                    
+                    <p class="lead mb-4">Avanza supports students in every step of the college application process.</p>
+                    
+                    <div class="accordion accordion-flush" id="stepList">
+                        
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stepContent1" aria-expanded="false" aria-controls="stepContent1">
+                                    1. Meet with an enrollment specialist
+                                    <span class="plus-minus-icon" id="icon1">+</span>
+                                </button>
+                            </h2>
+                            <div id="stepContent1" class="accordion-collapse collapse" data-bs-parent="#stepList">
+                                <div class="accordion-body">
+                                    Book a free consultation to discuss your academic profile, goals, challenges, and aspirations. We will craft a personalized roadmap for success.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stepContent2" aria-expanded="false" aria-controls="stepContent2">
+                                    2. Get matched with a coach
+                                    <span class="plus-minus-icon" id="icon2">+</span>
+                                </button>
+                            </h2>
+                            <div id="stepContent2" class="accordion-collapse collapse" data-bs-parent="#stepList">
+                                <div class="accordion-body">
+                                    You will be paired with a specialist coach who has expertise in your specific academic needs (e.g., test prep, essay writing, executive function).
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#stepContent3" aria-expanded="false" aria-controls="stepContent3">
+                                    3. Meet with your coach and utilize our resources
+                                    <span class="plus-minus-icon" id="icon3">+</span>
+                                </button>
+                            </h2>
+                            <div id="stepContent3" class="accordion-collapse collapse" data-bs-parent="#stepList">
+                                <div class="accordion-body">
+                                    Attend regular 1:1 sessions, access our exclusive library of resources, and receive guidance on course selection, activities, and strategy.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#stepContent4" aria-expanded="true" aria-controls="stepContent4">
+                                    4. Submit applications
+                                    <span class="plus-minus-icon" id="icon4">+</span>
+                                </button>
+                            </h2>
+                            <div id="stepContent4" class="accordion-collapse collapse show" data-bs-parent="#stepList">
+                                <div class="accordion-body">
+                                    After meeting 1-on-1 with your coach and perfecting your application materials, the student will send his or her college applications.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    
+                    <a href="/schedule" class="btn btn-lg mt-5 fw-bold btn-primary-orange">Get Matched Today</a>
+                </div>
+
+                <div class="col-lg-6 d-none d-lg-block">
+                    <div class="image-container-styled">
+                        <img src="https://via.placeholder.com/600x600/000000/FFFFFF?text=Team+Image+Placeholder" alt="Avanza Coaching Team" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="results-section py-5">
+        <h2 class="text-center mb-5 display-5 fw-bold">Acceptances and Testimonials</h2>
+        
+        <div class="container">
+            
+            <div id="logoCarousel" class="carousel slide mb-5" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center text-center">
+                            <div class="col logo-item"><img src="https://via.placeholder.com/100x100?text=BROWN" alt="Brown University"><p class="mt-2">Brown University</p></div>
+                            <div class="col logo-item"><img src="https://via.placeholder.com/100x100?text=CORNELL" alt="Cornell University"><p class="mt-2">Cornell University</p></div>
+                            <div class="col logo-item d-none d-md-block"><img src="https://via.placeholder.com/100x100?text=NOTREDAME" alt="Notre Dame"><p class="mt-2">Notre Dame</p></div>
+                            <div class="col logo-item d-none d-lg-block"><img src="https://via.placeholder.com/100x100?text=STANFORD" alt="Stanford University"><p class="mt-2">Stanford University</p></div>
+                            <div class="col logo-item d-none d-lg-block"><img src="https://via.placeholder.com/100x100?text=DUKE" alt="Duke University"><p class="mt-2">Duke University</p></div>
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <div class="row justify-content-center text-center">
+                            <div class="col logo-item"><img src="https://via.placeholder.com/100x100?text=UPENN" alt="UPenn"><p class="mt-2">UPenn</p></div>
+                            <div class="col logo-item"><img src="https://via.placeholder.com/100x100?text=COLUMBIA" alt="Columbia University"><p class="mt-2">Columbia University</p></div>
+                            <div class="col logo-item d-none d-md-block"><img src="https://via.placeholder.com/100x100?text=UCB" alt="UC Berkeley"><p class="mt-2">UC Berkeley</p></div>
+                            <div class="col logo-item d-none d-lg-block"><img src="https://via.placeholder.com/100x100?text=MIT" alt="MIT"><p class="mt-2">MIT</p></div>
+                            <div class="col logo-item d-none d-lg-block"><img src="https://via.placeholder.com/100x100?text=UCLA" alt="UCLA"><p class="mt-2">UCLA</p></div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#logoCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#logoCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+
+            <div id="testimonialCarousel" class="carousel slide py-4" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    
+                    <div class="carousel-item active">
+                        <div class="row justify-content-center">
+                            
+                            <div class="col-md-4 mb-4">
+                                <div class="testimonial-card">
+                                    <img src="https://via.placeholder.com/120x120?text=Student+1" alt="Marcela Simon">
+                                    <p class="testimonial-text">"My coach got to know me and my when I do. Even when things were difficult, they guided me to colleges."</p>
+                                    <p class="testimonial-author">Marcela Simon, TCU</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 mb-4 d-none d-md-block">
+                                <div class="testimonial-card">
+                                    <img src="https://via.placeholder.com/120x120?text=Student+2" alt="Mario Ochoa">
+                                    <p class="testimonial-text">"Thanks to Empowered's help, I went from feeling scared and confused to confident and inspired about the college application process."</p>
+                                    <p class="testimonial-author">Mario Ochoa, Unlisted/TX</p>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-4 mb-4 d-none d-lg-block">
+                                <div class="testimonial-card">
+                                    <img src="https://via.placeholder.com/120x120?text=Student+3" alt="Laura Vega">
+                                    <p class="testimonial-text">"My calls supported me, I was able to achieve my goals and submit the application in time. I still won even when things got rough."</p>
+                                    <p class="testimonial-author">Laura Vega, TCU</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                    <div class="carousel-item">
+                        <div class="row justify-content-center">
+                            <div class="col-md-4 mb-4">
+                                <div class="testimonial-card">
+                                    <img src="https://via.placeholder.com/120x120?text=Student+4" alt="New Student">
+                                    <p class="testimonial-text">"Avanza provided the clarity and accountability I needed to succeed in my academics and applications."</p>
+                                    <p class="testimonial-author">New Student, NYU</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mb-4 d-none d-md-block">
+                                <div class="testimonial-card">
+                                    <img src="https://via.placeholder.com/120x120?text=Student+5" alt="Another Student">
+                                    <p class="testimonial-text">"The coaching was personalized and gave me the competitive edge I was looking for."</p>
+                                    <p class="testimonial-author">Another Student, Princeton</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            
+            <div class="text-center mt-4">
+                <a href="/results" class="btn btn-lg fw-bold btn-primary-orange">Read More</a>
+            </div>
+            
+        </div>
+    </section>
+    <section class="container py-5 bg-light">
+        <h2 class="text-center mb-5">Meet Our Team</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4 text-center">
+                <img src="https://via.placeholder.com/150" alt="Team Member Name" class="rounded-circle mb-3 shadow-sm">
+                <h5 class="fw-bold">Roberto Hasbun</h5>
+                <p class="text-muted">Founder & Lead Coach</p>
+                <a href="/about#roberto" class="btn btn-sm btn-outline-dark">Read More</a>
+            </div>
+            <div class="col-md-4 text-center">
+                <img src="https://via.placeholder.com/150" alt="Team Member Name" class="rounded-circle mb-3 shadow-sm">
+                <h5 class="fw-bold">Jane Doe</h5>
+                <p class="text-muted">Executive Function Coach</p>
+                <a href="/about#jane" class="btn btn-sm btn-outline-dark">Read More</a>
+            </div>
+            </div>
+    </section>
+
   </main>
 
 
   <%- include('partials/footer') %>
 
-  <!-- CRITICAL: Bootstrap JS is required for the navbar tabs to show/toggle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- Slideshow JavaScript Logic -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
       const images = document.querySelectorAll('#slideshow-container img');
@@ -153,25 +554,48 @@
 
       // Set initial state: only the first image should be visible
       if (images.length > 0) {
-        images.forEach(img => img.style.opacity = '0'); // Ensure all are initially hidden
-        images[currentImageIndex].style.opacity = '1'; // Show the first one
-      }
-
-      function nextSlide() {
-        // 1. Hide the current image
-        images[currentImageIndex].style.opacity = '0';
-
-        // 2. Calculate the index of the next image (looping)
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-
-        // 3. Show the next image
+        images.forEach(img => img.style.opacity = '0');
         images[currentImageIndex].style.opacity = '1';
       }
 
-      // Start the slideshow interval
+      function nextSlide() {
+        images[currentImageIndex].style.opacity = '0';
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        images[currentImageIndex].style.opacity = '1';
+      }
+
       if (images.length > 1) {
         setInterval(nextSlide, intervalTime);
       }
+      
+      // JAVASCRIPT FIX 1: Fixes the initial icon state for the default-open step (Step 4)
+      const defaultOpenButton = document.querySelector('#stepContent4').previousElementSibling.querySelector('.accordion-button');
+      if (defaultOpenButton) {
+          const icon = defaultOpenButton.querySelector('.plus-minus-icon');
+          if (icon) {
+              // Manually apply the rotation CSS rule on load for the default open step
+              icon.style.transform = 'rotate(45deg)';
+          }
+      }
+      
+      // JAVASCRIPT FIX 2: Listen to Bootstrap's events to update the icon transform
+      const accordionElement = document.getElementById('stepList');
+      if (accordionElement) {
+          accordionElement.addEventListener('shown.bs.collapse', function (e) {
+              const icon = e.target.previousElementSibling.querySelector('.plus-minus-icon');
+              if (icon) {
+                  icon.style.transform = 'rotate(45deg)'; // Rotate to minus
+              }
+          });
+
+          accordionElement.addEventListener('hidden.bs.collapse', function (e) {
+              const icon = e.target.previousElementSibling.querySelector('.plus-minus-icon');
+              if (icon) {
+                  icon.style.transform = 'rotate(0deg)'; // Reset to plus
+              }
+          });
+      }
+      
     });
   </script>
 </body>

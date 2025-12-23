@@ -3,25 +3,96 @@
 <head>
   <title>About Us – Avanza</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
-  <%- include('partials/header', { session: session, page: 'about' }) %>
+  <%- include('partials/navbar', { session: session, page: 'about' }) %>
     <main class="flex-fill">
 
-  <section class="container py-5">
-    <h1 class="mb-4">About Us</h1>
+      <section class="container py-5">
+        <h1 class="mb-4">About Us</h1>
 
-    <p class="lead">
-      Avanza is dedicated to helping students thrive academically through personalized
-      coaching, executive function skill-building, and compassionate support.
-    </p>
+        <p class="lead">
+          Avanza is dedicated to helping students thrive academically through personalized
+          coaching, executive function skill-building, and compassionate support.
+        </p>
 
-    <p>
-      We believe every student has the ability to succeed with the right guidance. Our coaches work
-      1-on-1 with students to improve organization, strengthen study habits, and build confidence.
-    </p>
+        <p>
+          We believe every student has the ability to succeed with the right guidance.
+          Our coaches work
+          1-on-1 with students to improve organization, strengthen study habits, and build confidence.
+        </p>
+      </section>
 
-  </section>
+      <section class="bg-primary text-white py-5">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-md-3 text-center">
+              <img src="https://via.placeholder.com/150" alt="Roberto Hasbun" class="rounded-circle border border-5 border-white shadow-lg mb-3 mb-md-0" />
+            </div>
+            <div class="col-md-9">
+              <h2 class="fw-bold">A Note from Roberto Hasbun, Founder</h2>
+              <p class="lead">"I started Avanza with a single vision: to bridge the gap between a student's potential and their academic achievement. Our journey is built on personal experience and a commitment to genuine, transformative mentorship."</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="container py-5">
+        <div class="row">
+          <div class="col-md-4">
+            <h3 class="fw-bold text-success">Our Mission</h3>
+            <p>To empower every student with the essential executive function and academic skills needed to navigate their education and achieve their college and career goals independently.</p>
+          </div>
+          <div class="col-md-4">
+            <h3 class="fw-bold text-primary">Our Vision</h3>
+            <p>To be the leading platform for personalized academic coaching, creating a global community of self-directed, resilient, and successful students who advance their own futures.</p>
+          </div>
+          <div class="col-md-4">
+            <h3 class="fw-bold" style="color: #FF8C00;">Our Values</h3>
+            <ul class="list-unstyled">
+              <li><i class="fas fa-check-circle me-2"></i> **Empathy**: Understanding the student's unique challenges.</li>
+              <li><i class="fas fa-check-circle me-2"></i> **Excellence**: Delivering the highest quality coaching.</li>
+              <li><i class="fas fa-check-circle me-2"></i> **Empowerment**: Cultivating self-advocacy and independence.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="container py-5 bg-light">
+        <h2 class="text-center mb-4">What Makes EduEmpowered Different?</h2>
+        <div class="row">
+          <div class="col-md-6">
+            <h4 class="fw-bold">The Empowered Foundation</h4>
+            <p>Our methodology focuses heavily on the "how," not just the "what." We build a strong foundation of **Executive Function Skills**—planning, prioritization, and sustained attention—that serves students long after their high school years, making them truly college and career ready.</p>
+          </div>
+          <div class="col-md-6">
+            <h4 class="fw-bold">Holistic, Mentorship-Driven Approach</h4>
+            <p>We combine personalized coaching with a mentorship philosophy. Our coaches are not just tutors; they are guides dedicated to developing the student's full potential, ensuring emotional and mental well-being alongside academic rigor.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="container py-5">
+        <h2 class="text-center mb-5">Meet Our Team</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4 text-center" id="roberto">
+                <img src="https://via.placeholder.com/150" alt="Roberto Hasbun" class="rounded-circle mb-3 shadow-sm">
+                <h5 class="fw-bold">Roberto Hasbun</h5>
+                <p class="text-muted">Founder & Lead Coach</p>
+                <p>Specializes in holistic college admissions consulting and executive function remediation.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary">View Full CV & Reviews</a>
+            </div>
+            <div class="col-md-4 text-center" id="jane">
+                <img src="https://via.placeholder.com/150" alt="Jane Doe" class="rounded-circle mb-3 shadow-sm">
+                <h5 class="fw-bold">Jane Doe</h5>
+                <p class="text-muted">Executive Function Coach</p>
+                <p>Expert in developing time management, organizational, and study strategies for high-achievers.</p>
+                <a href="#" class="btn btn-sm btn-outline-primary">View Full CV & Reviews</a>
+            </div>
+            </div>
+      </section>
+
     </main>
 
   <%- include('partials/footer') %>
