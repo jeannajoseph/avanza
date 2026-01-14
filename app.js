@@ -104,6 +104,8 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const path = require('path');
 
+const blogRoutes = require('./routes/blog');
+
 require('dotenv').config();
 
 const app = express();
@@ -146,6 +148,7 @@ app.use('/', require('./routes/auth'));
 // Role-based features
 app.use('/student', require('./routes/student'));
 app.use('/coach', require('./routes/coach'));
+app.use('/blog', blogRoutes);
 
 
 // -----------------------------
@@ -166,7 +169,6 @@ app.get('/services', (req, res) => {
 app.get('/contact', (req, res) => {
   res.render('contact', { page: 'contact' });
 });
-
 
 // -----------------------------
 // LOGIN / REGISTER / LOGOUT
